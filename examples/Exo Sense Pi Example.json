@@ -1,0 +1,153 @@
+[
+    {
+        "id": "886356a732d7b1ac",
+        "type": "tab",
+        "label": "Exo Sense Pi Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4afec486dbd8bd70",
+        "type": "exosensepi",
+        "z": "886356a732d7b1ac",
+        "name": "",
+        "file": "r:tha/temp_rh_voc",
+        "outputs": 1,
+        "x": 450,
+        "y": 80,
+        "wires": [
+            [
+                "1288e56b8804a097"
+            ]
+        ]
+    },
+    {
+        "id": "58bd3e6b50089dca",
+        "type": "inject",
+        "z": "886356a732d7b1ac",
+        "name": "Trigger read every second",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "500",
+        "payloadType": "str",
+        "x": 180,
+        "y": 80,
+        "wires": [
+            [
+                "4afec486dbd8bd70"
+            ]
+        ]
+    },
+    {
+        "id": "03ceff049affcb4a",
+        "type": "exosensepi",
+        "z": "886356a732d7b1ac",
+        "name": "",
+        "file": "w:buzzer/beep",
+        "outputs": 0,
+        "x": 820,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1288e56b8804a097",
+        "type": "csv",
+        "z": "886356a732d7b1ac",
+        "name": "Split values",
+        "sep": " ",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "s,t,tCal,rh,rhCal,voc,vocIdx",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "6086d94cb7c23f8f",
+                "b2f2c7f74ac15c68"
+            ]
+        ]
+    },
+    {
+        "id": "6086d94cb7c23f8f",
+        "type": "switch",
+        "z": "886356a732d7b1ac",
+        "name": "if payload.tCal > 2300",
+        "property": "payload.tCal",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "2300",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "fb4a86ea20a42ae5"
+            ]
+        ]
+    },
+    {
+        "id": "fb4a86ea20a42ae5",
+        "type": "change",
+        "z": "886356a732d7b1ac",
+        "name": "send '100' (100ms beep)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "100",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "03ceff049affcb4a"
+            ]
+        ]
+    },
+    {
+        "id": "b2f2c7f74ac15c68",
+        "type": "debug",
+        "z": "886356a732d7b1ac",
+        "name": "Show tCal (calibrated temperature °C/100)",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.tCal",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 990,
+        "y": 80,
+        "wires": []
+    }
+]

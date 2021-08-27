@@ -1,0 +1,36 @@
+{
+  "name": "node-red-contrib-sfera-labs-exo-sense-pi",
+  "version": "1.0.0",
+  "description": "Node-RED nodes for Exo Sense Pi - Multi-sensor module with Raspberry Pi 4 core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sfera-labs/node-red-contrib-sfera-labs-exo-sense-pi.git"
+  },
+  "dependencies": {
+      "node-red-contrib-sfera-labs-commons": "^1.0.0"
+  },
+  "keywords": [
+    "node-red",
+    "exo",
+    "sense",
+    "exosense",
+    "exosensepi",
+    "raspberry",
+    "pi",
+    "sensor",
+    "sfera",
+    "labs",
+    "sferalabs"
+  ],
+  "author": "Giampiero Baggiani <giampiero@sferalabs.cc>",
+  "license": "LGPL-2.1-or-later",
+  "bugs": {
+    "url": "https://github.com/sfera-labs/node-red-contrib-sfera-labs-exo-sense-pi/issues"
+  },
+  "homepage": "https://github.com/sfera-labs/node-red-contrib-sfera-labs-exo-sense-pi#readme",
+  "node-red" : {
+    "nodes": {
+      "exosensepi": "exosensepi.js"
+    }
+  }
+}
